@@ -40,8 +40,26 @@ const todoSchema = new Schema({
   })
 
   todo.get('/',async (req,res)=>{
+
+    const {status}=req.query;
+    console.log(status);
+    if(status){
+        if(status=="pending"){
+            const pendingdata=await Todo.find({"status":{"$eq":false}});
+            return res.send(pendingdata)
+        }else{
+            const truedata=await Todo.find({"status":{"$eq":true}});
+            return res.send(truedata)
+        }
+    }
     const todos=await Todo.find();
     return res.send(todos)
   })
+
+  todo.get('/id/:id',async (req,res)=>{
+    const todos=await Todo.findOne({"id":{"$eq":req.params.id}});
+    return res.send(todos)
+  })
+
 
   module.exports=todo;
