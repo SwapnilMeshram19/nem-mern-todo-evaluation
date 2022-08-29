@@ -11,7 +11,7 @@ async function main(){
     app.use('/todo',todo);
 }
 
-app.listen(8080,()=>{
+app.listen(3000,()=>{
     console.log('server started');
     main();
 })
