@@ -23,7 +23,7 @@ user.post('/',async (req,res)=>{
     const {email,password}=userData
     const data=await User.findOne({"$and":[{"email":{"$eq":email}},{"password":{"$eq":password}}]});
     console.log(data)
-    return res.send(data.name);
+    return res.send(data);
     
   }catch(error){
     console.log(error);
